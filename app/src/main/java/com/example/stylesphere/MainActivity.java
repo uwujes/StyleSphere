@@ -1,35 +1,33 @@
 package com.example.stylesphere;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.stylesphere.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private Toolbar toolbar;
+    private Button shortSleeveButton;
+    private Button longSleeveButton;
+    private Button pantsButton;
+    private Button shortsButton;
+    private Button dressesButton;
+    private Button skirtsButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        setContentView(R.layout.activity_main);
-//
-//        if (getSupportActionBar() != null) {
-//            getSupportActionBar().hide();
-//        }
-//
-//        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-//        setSupportActionBar(toolbar); //NO PROBLEM !!!!
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -43,6 +41,84 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        shortSleeveButton = (Button) findViewById(R.id.shortSleeveTops);
+        longSleeveButton = (Button) findViewById(R.id.longSleeveTops);
+        pantsButton = (Button) findViewById(R.id.pants);
+        shortsButton = (Button) findViewById(R.id.shorts);
+        skirtsButton = (Button) findViewById(R.id.skirts);
+        dressesButton = (Button) findViewById(R.id.dresses);
+
+        shortSleeveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openShortSleevePage();
+            }
+        });
+
+        longSleeveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLongSleevePage();
+            }
+        });
+
+        pantsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPantsPage();
+            }
+        });
+
+        shortsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openShortsPage();
+            }
+        });
+
+        skirtsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSkirtsPage();
+            }
+        });
+
+        dressesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDressesPage();
+            }
+        });
     }
 
+    public void openShortSleevePage() {
+        Intent intent = new Intent(this, ShortSleeveActivity.class);
+        startActivity(intent);
+    }
+
+    public void openLongSleevePage() {
+        Intent intent = new Intent(this, LongSleeveActivity.class);
+        startActivity(intent);
+    }
+
+    public void openPantsPage() {
+        Intent intent = new Intent(this, PantsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openShortsPage() {
+        Intent intent = new Intent(this, ShortsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openSkirtsPage() {
+        Intent intent = new Intent(this, SkirtsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openDressesPage() {
+        Intent intent = new Intent(this, DressesActivity.class);
+        startActivity(intent);
+    }
 }
