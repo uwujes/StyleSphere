@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/my_toolbar"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginTop="28dp"-->
+<!--        android:background="?attr/colorPrimary"-->
+<!--        android:elevation="4dp"-->
+<!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
+
     <TextView
         android:id="@+id/text_home"
         android:layout_width="match_parent"
@@ -13,10 +28,118 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="monospace"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.061"
+        tools:text="Closet" />
+
+    <Button
+        android:id="@+id/shortSleeveTops"
+        android:layout_width="147dp"
+        android:layout_height="117dp"
+        android:background="@android:color/white"
+        android:contextClickable="true"
+        android:fontFamily="serif-monospace"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/longSleeveTops"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.187"
+        tools:text="Short Sleeve Tops" />
+
+    <Button
+        android:id="@+id/longSleeveTops"
+        android:layout_width="147dp"
+        android:layout_height="117dp"
+        android:background="@color/white"
+        android:fontFamily="serif-monospace"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/shortSleeveTops"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.187"
+        tools:text="Long Sleeve Tops" />
+
+    <Button
+        android:id="@+id/Pants"
+        android:layout_width="150dp"
+        android:layout_height="113dp"
+        android:fontFamily="serif-monospace"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shorts"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.376"
+        tools:background="@color/white"
+        tools:text="Pants" />
+
+    <Button
+        android:id="@+id/shorts"
+        android:layout_width="150dp"
+        android:layout_height="113dp"
+        android:fontFamily="serif-monospace"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Pants"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.375"
+        tools:background="@color/white"
+        tools:text="Shorts" />
+
+    <Button
+        android:id="@+id/dresses"
+        android:layout_width="150dp"
+        android:layout_height="113dp"
+        android:fontFamily="serif-monospace"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Skirts"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.576"
+        tools:background="@color/white"
+        tools:text="Dresses" />
+
+    <Button
+        android:id="@+id/Skirts"
+        android:layout_width="150dp"
+        android:layout_height="113dp"
+        android:fontFamily="serif-monospace"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/dresses"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.575"
+        tools:background="@color/white"
+        tools:text="Skirts" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
