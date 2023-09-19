@@ -36,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.061"
+        app:layout_constraintVertical_bias="0.009"
         tools:text="Closet" />
 
     <Button
@@ -46,6 +46,7 @@
         android:background="@android:color/white"
         android:contextClickable="true"
         android:fontFamily="serif-monospace"
+        android:text="Short Sleeve Tops"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@android:color/black"
         android:textSize="24sp"
@@ -54,8 +55,7 @@
         app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.338"
-        android:text="Short Sleeve Tops" />
+        app:layout_constraintVertical_bias="0.158" />
 
     <Button
         android:id="@+id/longSleeveTops"
@@ -63,6 +63,7 @@
         android:layout_height="117dp"
         android:background="@color/white"
         android:fontFamily="serif-monospace"
+        android:text="Long Sleeve Tops"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -71,8 +72,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/shortSleeveTops"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.338"
-        android:text="Long Sleeve Tops" />
+        app:layout_constraintVertical_bias="0.157" />
 
     <Button
         android:id="@+id/pants"
@@ -80,6 +80,7 @@
         android:layout_height="113dp"
         android:background="@color/white"
         android:fontFamily="serif-monospace"
+        android:text="Pants"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -88,14 +89,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57"
-        android:text="Pants" />
+        app:layout_constraintVertical_bias="0.406" />
 
     <Button
         android:id="@+id/shorts"
         android:layout_width="150dp"
         android:layout_height="113dp"
+        android:background="@color/white"
         android:fontFamily="serif-monospace"
+        android:text="Shorts"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -104,15 +106,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/pants"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569"
-        android:background="@color/white"
-        android:text="Shorts" />
+        app:layout_constraintVertical_bias="0.405" />
 
     <Button
         android:id="@+id/dresses"
         android:layout_width="150dp"
         android:layout_height="113dp"
+        android:background="@color/white"
         android:fontFamily="serif-monospace"
+        android:text="Dresses"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -121,15 +123,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809"
-        android:background="@color/white"
-        android:text="Dresses" />
+        app:layout_constraintVertical_bias="0.636" />
 
     <Button
         android:id="@+id/skirts"
         android:layout_width="150dp"
         android:layout_height="113dp"
+        android:background="@color/white"
         android:fontFamily="serif-monospace"
+        android:text="Skirts"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -138,8 +140,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/dresses"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.808"
-        android:background="@color/white"
-        android:text="Skirts" />
+        app:layout_constraintVertical_bias="0.636" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
