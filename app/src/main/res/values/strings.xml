@@ -3,7 +3,7 @@
     <string name="title_closet">✧ Closet ✧</string>
     <string name="title_outfitRecommendation">Find a outfit</string>
     <string name="title_tips">Tips</string>
-    <string name="title_activity_short_sleeve">ShortSleeveActivity</string>
+    <string name="title_activity_short_sleeve">Short Sleeves</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -94,9 +94,9 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_long_sleeve">LongSleeveActivity</string>
-    <string name="title_activity_pants">PantsActivity</string>
-    <string name="title_activity_shorts">ShortsActivity</string>
-    <string name="title_activity_skirts">SkirtsActivity</string>
-    <string name="title_activity_dresses">DressesActivity</string>
+    <string name="title_activity_long_sleeve">Long Sleeves</string>
+    <string name="title_activity_pants">Pants</string>
+    <string name="title_activity_shorts">Shorts</string>
+    <string name="title_activity_skirts">Skirts</string>
+    <string name="title_activity_dresses">Dresses</string>
 </resources>
