@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,6 +29,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,6 +41,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 
 public class ShortSleeveActivity extends AppCompatActivity {
@@ -60,6 +66,9 @@ public class ShortSleeveActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
 
     private StorageTask mUploadTask;
+    private GridView gridView;
+    private ArrayList<ImageData> dataList;
+    private MyAdapter adapter;
 
 
     @Override
@@ -71,19 +80,24 @@ public class ShortSleeveActivity extends AppCompatActivity {
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
-        CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
-        toolBarLayout.setTitle(getTitle());
+        //CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
+        //toolBar.setTitle(getTitle());
 
         // register the UI widgets with their appropriate IDs
         //IVPreviewImage = findViewById(R.id.IVPreviewImage);
 
-        FloatingActionButton choosePhoto = binding.photos;
+        Button choosePhoto = binding.photos;
         mButtonUpload = findViewById(R.id.button_upload);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("shortSleeves");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("shortSleeves");
+
+        gridView = findViewById(R.id.gridView);
+        dataList = new ArrayList<>();
+        adapter = new MyAdapter(this, dataList);
+        gridView.setAdapter(adapter);
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -118,6 +132,20 @@ public class ShortSleeveActivity extends AppCompatActivity {
                 } else  {
                     Toast.makeText(ShortSleeveActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    ImageData dataClass = dataSnapshot.getValue(ImageData.class);
+                    dataList.add(dataClass);
+                }
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }

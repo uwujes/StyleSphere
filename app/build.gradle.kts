@@ -72,4 +72,8 @@ dependencies {
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 
+    implementation("com.github.bumptech.glide:glide:4.14.2")
+        annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
+    implementation("com.makeramen:roundedimageview:2.3.0")
+
 }
