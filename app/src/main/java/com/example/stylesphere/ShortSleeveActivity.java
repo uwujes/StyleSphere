@@ -5,14 +5,12 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -26,21 +24,15 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.stylesphere.databinding.ActivityShortSleeveBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,24 +40,12 @@ import java.util.ArrayList;
 public class ShortSleeveActivity extends AppCompatActivity {
 
     private ActivityShortSleeveBinding binding;
-    ImageView IVPreviewImage;
-
-    // constant to compare
-    // the activity result code
-    int SELECT_PICTURE = 200;
-    private static final int PICK_IMAGE_REQUEST = 1;
-
     private Button mButtonUpload;
-    private TextView mTextViewShowUploads;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
-
     private Uri mImageUri;
-
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-
-    private StorageTask mUploadTask;
     private GridView gridView;
     private ArrayList<ImageData> dataList;
     private MyAdapter adapter;
@@ -80,11 +60,6 @@ public class ShortSleeveActivity extends AppCompatActivity {
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
-        //CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
-        //toolBar.setTitle(getTitle());
-
-        // register the UI widgets with their appropriate IDs
-        //IVPreviewImage = findViewById(R.id.IVPreviewImage);
 
         Button choosePhoto = binding.photos;
         mButtonUpload = findViewById(R.id.button_upload);
@@ -104,7 +79,7 @@ public class ShortSleeveActivity extends AppCompatActivity {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK){
+                        if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             mImageUri = data.getData();
                             mImageView.setImageURI(mImageUri);
@@ -127,9 +102,9 @@ public class ShortSleeveActivity extends AppCompatActivity {
         mButtonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mImageUri != null){
+                if (mImageUri != null) {
                     uploadToFirebase(mImageUri);
-                } else  {
+                } else {
                     Toast.makeText(ShortSleeveActivity.this, "Please select image", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -144,14 +119,14 @@ public class ShortSleeveActivity extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
 
-    private void uploadToFirebase(Uri uri){
-        //String caption = uploadCaption.getText().toString();
+    private void uploadToFirebase(Uri uri) {
         final StorageReference imageReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(uri));
         imageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -183,7 +158,8 @@ public class ShortSleeveActivity extends AppCompatActivity {
             }
         });
     }
-    private String getFileExtension(Uri fileUri){
+
+    private String getFileExtension(Uri fileUri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(fileUri));

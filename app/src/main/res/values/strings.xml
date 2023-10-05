@@ -3,7 +3,8 @@
     <string name="title_closet">✧ Closet ✧</string>
     <string name="title_outfitRecommendation"> ̗̀➛ Find a outfit </string>
     <string name="title_tips">˗ˏˋTips´ˎ˗</string>
-    <string name="uploadPhoto">Upload Photo</string>
+    <string name="upload">Upload</string>
+    <string name="choose">Choose</string>
     <string name="title_activity_short_sleeve">Short Sleeves</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
