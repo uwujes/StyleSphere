@@ -26,16 +26,14 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="773dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/app_bar"
         android:layout_marginTop="27dp"
         android:fontFamily="serif-monospace"
-        android:lineSpacingExtra="8sp"
         android:scrollbars="vertical"
         android:text="@string/faqText"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="24sp"
-        app:layout_anchorGravity="center" />
+        android:textSize="16sp" />
 
 </RelativeLayout>

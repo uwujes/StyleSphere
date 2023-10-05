@@ -6,34 +6,6 @@
     <string name="faq">FAQs</string>
     <string name="tips">Style Tips and Trends</string>
     <string name="title_activity_faq">FAQ</string>
-    <string name="faqText">
-        "How good do the pictures have to be?\n"
-
-        "As long as the item is centered and the you can see the clothing item, it is good.\n\n"
-
-
-        "What if I have a romper?\n"
-
-        "The romper will go under dresses if no under top is worn with it.\n"
-        "If the romper needs a under shirt, put the romper under shorts/skirts/pants"
-        "depending on the bottom of the romper.\n\n"
-
-
-        "What if I have overalls?\n"
-        "Place the overalls under shorts/skirts/pants depending on the bottom of the overalls.\n\n"
-
-        "What about sweaters?\n"
-        "Currently this app only supports the first layer of clothing."
-        "If you wear sweaters with no undershirt, then place them in the long sleeve category."
-        "This goes for coats and jackets.\n\n"
-
-        "Can I upload more than 1 photo at a time?\n"
-
-        "Right now, the app only supports choosing and uploading one photo at a time.\n\n"
-
-
-    </string>
-
     <string name="action_settings">Settings</string>
     <string name="title_activity_style_tips">StyleTips</string>
     <string name="upload">Upload</string>
@@ -44,4 +16,32 @@
     <string name="title_activity_shorts">Shorts</string>
     <string name="title_activity_skirts">Skirts</string>
     <string name="title_activity_dresses">Dresses</string>
+
+    <string name="faqText">
+        "<b>How good do the pictures have to be?</b>\n As long as the item is centered and you can see the clothing item, it is good.\n\n
+        <b>What if I have a romper?</b>\n The romper will go under dresses if no under top is worn with it.\n If the romper needs a under shirt, put the romper under shorts/skirts/pants depending on the bottom of the romper.\n\n
+        <b>What if I have overalls?</b>\n Place the overalls under shorts/skirts/pants depending on the bottom of the overalls.\n\n
+        <b>What about sweaters?</b>\n Currently this app only supports the first layer of clothing. If you wear sweaters with no undershirt, then place them in the long sleeve category. This goes for coats and jackets.\n\n
+        <b>Can I upload more than 1 photo at a time?</b>\n Right now, the app only supports choosing and uploading one photo at a time.\n\n"
+    </string>
+
+    <string name="TipsTrends">
+        "\u2022 Dont forget to accessorize and make sure you use gold/silver jewlery depending on what looks best on your skin."
+        "But remember you are allowed to wear to whatever you want!\n\n"
+
+        "\u2022 Wear appropriate footwear. Wear rainboots in the rain or cute sandals in the heat.\n\n"
+
+        "\u2022 According to Vogue, Fall season trends for 2023 include knit maxi dresses. We see this with this season's \n"
+        "Christopher Esber’s fabulous 2-in-1 maxi. With y2k trending along social media, \n"
+        "denim is huge right now, including longline denim skirts. More trends include ballet flats.\n"
+        "We have seen these all over tiktok so there is no surprise they are staying here till fall.\n"
+        "A pattern we will see this fall, polka-dots. With labels like Marni and Jacquemus using this\n"
+        "print in fall season dresses.\n\n"
+
+        "\u2022 Build a closet you love filled with forever classic pieces.\n\n"
+
+        "\u2022 If you haven't worn an item is years, let it go. You will forget you had it in a week.\n\n"
+
+        "\u2022 If wearing a tight top balance it out with a looser bottom and vice-versa."
+    </string>
 </resources>
