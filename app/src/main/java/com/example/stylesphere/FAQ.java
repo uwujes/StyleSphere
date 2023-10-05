@@ -9,7 +9,9 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.stylesphere.databinding.ActivityFaqBinding;
 
@@ -17,17 +19,21 @@ public class FAQ extends AppCompatActivity {
 
     private ActivityFaqBinding binding;
 
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityFaqBinding.inflate(getLayoutInflater());
+        View root = binding.getRoot();
         setContentView(binding.getRoot());
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
-        CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
-        toolBarLayout.setTitle(getTitle());
+        textView = root.findViewById(R.id.textView);
+        textView.setMovementMethod(new ScrollingMovementMethod());
+
+
 
 //        FloatingActionButton fab = binding.fab;
 //        fab.setOnClickListener(new View.OnClickListener() {
