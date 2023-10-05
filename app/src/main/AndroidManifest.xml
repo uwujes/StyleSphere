@@ -13,6 +13,36 @@
         android:theme="@style/Theme.StyleSphere"
         tools:targetApi="31">
         <activity
+            android:name=".DressesActivity"
+            android:exported="false"
+            android:label="@string/title_activity_dresses"
+            android:theme="@style/Theme.StyleSphere.NoActionBar" />
+        <activity
+            android:name=".SkirtsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_skirts"
+            android:theme="@style/Theme.StyleSphere.NoActionBar" />
+        <activity
+            android:name=".ShortsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_shorts"
+            android:theme="@style/Theme.StyleSphere.NoActionBar" />
+        <activity
+            android:name=".PantsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_pants"
+            android:theme="@style/Theme.StyleSphere.NoActionBar" />
+        <activity
+            android:name=".LongSleeveActivity"
+            android:exported="false"
+            android:label="@string/title_activity_long_sleeve"
+            android:theme="@style/Theme.StyleSphere.NoActionBar" />
+        <activity
+            android:name=".ShortSleeveActivity"
+            android:exported="false"
+            android:label="@string/title_activity_short_sleeve"
+            android:theme="@style/Theme.StyleSphere.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">

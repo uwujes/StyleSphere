@@ -3,18 +3,18 @@
 
     <item
         android:id="@+id/navigation_closet"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/checkroom_black_24dp"
         android:title="@string/title_closet"
         android:visible="true" />
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/man_choosing_clothes_in_front_of_mirror_svgrepo_com"
         android:title="@string/title_outfitRecommendation" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/heart_glasses_3_svgrepo_com"
         android:title="@string/title_tips" />
 
 </menu>
