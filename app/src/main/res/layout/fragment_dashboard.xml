@@ -8,18 +8,68 @@
 
     <TextView
         android:id="@+id/text_dashboard"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Generate an outfit below!"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="752dp"
+        android:text="@string/generate"
         android:textAlignment="center"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/outfit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/weather"
+        android:layout_width="346dp"
+        android:layout_height="262dp"
+        app:layout_constraintBottom_toTopOf="@+id/clothing1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_dashboard"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Button
+        android:id="@+id/outfit"
+        android:layout_width="249dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="71dp"
+        android:background="@android:color/white"
+        android:contextClickable="true"
+        android:fontFamily="serif-monospace"
+        android:text="@string/generate2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
+
+    <ImageView
+        android:id="@+id/clothing1"
+        android:layout_width="194dp"
+        android:layout_height="187dp"
+        android:layout_marginStart="32dp"
+        android:contentDescription="@string/firstItem"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/clothing2"
+        android:layout_width="194dp"
+        android:layout_height="187dp"
+        android:contentDescription="@string/sndItem"
+        app:layout_constraintBottom_toTopOf="@+id/outfit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.852"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothing1"
+        app:layout_constraintVertical_bias="0.456"
+        tools:src="@tools:sample/avatars" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

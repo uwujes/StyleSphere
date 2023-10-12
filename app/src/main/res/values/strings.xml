@@ -16,6 +16,12 @@
     <string name="title_activity_shorts">Shorts</string>
     <string name="title_activity_skirts">Skirts</string>
     <string name="title_activity_dresses">Dresses</string>
+    <string name="generate">Generate an outfit below!</string>
+    <string name="generate2">Generate outfit</string>
+    <string name="firstItem">First Item</string>
+    <string name="sndItem">Second Item</string>
+
+
 
     <string name="faqText">
         "<b>How good do the pictures have to be?</b>\n As long as the item is centered and you can see the clothing item, it is good.\n\n
