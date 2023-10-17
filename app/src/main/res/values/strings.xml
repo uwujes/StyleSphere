@@ -20,6 +20,11 @@
     <string name="generate2">Generate outfit</string>
     <string name="firstItem">First Item</string>
     <string name="sndItem">Second Item</string>
+    <string name="weather">Get Weather</string>
+    <string name="status">Status</string>
+    <string name="location">Location</string>
+    <string name="temp">Temp</string>
+    <string name="date">Date</string>
 
 
 
