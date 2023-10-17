@@ -38,8 +38,8 @@
 
     <ImageView
         android:id="@+id/clothing1"
-        android:layout_width="207dp"
-        android:layout_height="204dp"
+        android:layout_width="231dp"
+        android:layout_height="242dp"
         android:contentDescription="@string/firstItem"
         app:layout_constraintBottom_toTopOf="@+id/clothing2"
         app:layout_constraintEnd_toStartOf="@+id/editTextDate"
@@ -95,8 +95,8 @@
 
     <TextView
         android:id="@+id/editTextDate"
-        android:layout_width="126dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:text="@string/date"
         app:layout_constraintBottom_toTopOf="@+id/temperature"

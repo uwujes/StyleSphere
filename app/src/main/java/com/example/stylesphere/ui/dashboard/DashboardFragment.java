@@ -37,6 +37,10 @@ import com.google.android.gms.tasks.Task;
 
 import com.example.stylesphere.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 import com.example.stylesphere.databinding.FragmentDashboardBinding;
 
@@ -47,6 +51,7 @@ public class DashboardFragment extends Fragment {
     private TextView location;
     private TextView status;
     private TextView temp;
+    String currentDate = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(new Date());
     private TextView date;
     private ImageView clothing1;
     private ImageView clothing2;
@@ -54,6 +59,7 @@ public class DashboardFragment extends Fragment {
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
     private ActivityResultLauncher<String> requestPermissionLauncher;
+
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +95,7 @@ public class DashboardFragment extends Fragment {
         status = root.findViewById(R.id.weatherDescription);
         temp = root.findViewById(R.id.temperature);
         date = root.findViewById(R.id.editTextDate);
+        date.setText(currentDate);
         clothing1 = root.findViewById(R.id.clothing1);
         clothing2 = root.findViewById(R.id.clothing2);
         getWeather = root.findViewById(R.id.weatherButton);
