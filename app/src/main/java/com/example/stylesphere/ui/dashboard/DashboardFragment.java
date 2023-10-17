@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -39,6 +40,7 @@ import com.example.stylesphere.R;
 
 import com.example.stylesphere.databinding.FragmentDashboardBinding;
 
+
 public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
@@ -51,8 +53,27 @@ public class DashboardFragment extends Fragment {
     private Button getWeather;
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
-    private ActivityResultLauncher<String[]> requestPermissionLauncher;
+    private ActivityResultLauncher<String> requestPermissionLauncher;
 
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Register for permission result here
+        requestPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (isGranted) {
+                        // Permission is granted, you can now proceed with your task
+                        getLastLocation();
+                    } else {
+                        // Permission denied, handle it accordingly
+                        // You might want to show a message to the user or ask for permission again
+                        requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+                    }
+                }
+        );
+    }
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -76,13 +97,11 @@ public class DashboardFragment extends Fragment {
 
         // method to get the location
         getWeather.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View view) {
-                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
                     // You don't have the permission, request it
-                    String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
-                    requestPermissionLauncher.launch(permissions);
+                    requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
                 } else {
                     // Permission is already granted, proceed with your task
                     getLastLocation();
@@ -201,8 +220,8 @@ public class DashboardFragment extends Fragment {
         if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // You don't have the permission, request it
-            String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
-            requestPermissionLauncher.launch(permissions);
+            //String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
         } else {
             // Permission is already granted, proceed with your task
             getLastLocation();
