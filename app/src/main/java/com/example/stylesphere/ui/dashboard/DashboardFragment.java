@@ -37,12 +37,20 @@ import com.google.android.gms.tasks.Task;
 
 import com.example.stylesphere.R;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 
 import com.example.stylesphere.databinding.FragmentDashboardBinding;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class DashboardFragment extends Fragment {
@@ -59,6 +67,10 @@ public class DashboardFragment extends Fragment {
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
     private ActivityResultLauncher<String> requestPermissionLauncher;
+    //Used to be ActivityResultLauncher<String[]> ,, make sure that this doesnt crash app later
+    private double latitude;
+    private double longitude;
+    String apiKey = "f0ad6112130a345e7a07c586812dcb41\n";
 
 
 
@@ -129,14 +141,9 @@ public class DashboardFragment extends Fragment {
     private void getLastLocation() {
         // check if permissions are given
         if (checkPermissions()) {
-
             // check if location is enabled
             if (isLocationEnabled()) {
-
-                // getting last
-                // location from
-                // FusedLocationClient
-                // object
+                // getting last location from FusedLocationClient object
                 mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
@@ -144,8 +151,10 @@ public class DashboardFragment extends Fragment {
                         if (location1 == null) {
                             requestNewLocationData();
                         } else {
-                            location.setText(location1.getLatitude() + " " + location1.getLongitude());
-                        }
+                            latitude= location1.getLatitude();
+                            longitude = location1.getLongitude();
+                            //location.setText(location1.getLatitude() + " " + location1.getLongitude());
+                            getWeatherFromAPI(latitude, longitude);                        }
                     }
                 });
             } else {
@@ -154,8 +163,7 @@ public class DashboardFragment extends Fragment {
                 startActivity(intent);
             }
         } else {
-            // if permissions aren't available,
-            // request for permissions
+            // if permissions aren't available, request for permissions
             requestPermissions();
         }
     }
@@ -163,13 +171,12 @@ public class DashboardFragment extends Fragment {
     @SuppressLint("MissingPermission")
     private void requestNewLocationData() {
 
-        // Initializing LocationRequest
-        // object with appropriate methods
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(5);
-        mLocationRequest.setFastestInterval(0);
-        mLocationRequest.setNumUpdates(1);
+        // Initializing LocationRequest object with appropriate methods
+        LocationRequest mLocationRequest = LocationRequest.create()
+                .setInterval(5)
+                .setFastestInterval(0)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setNumUpdates(1);;
 
         // setting LocationRequest
         // on FusedLocationClient
@@ -182,7 +189,10 @@ public class DashboardFragment extends Fragment {
         @Override
         public void onLocationResult(LocationResult locationResult) {
             Location mLastLocation = locationResult.getLastLocation();
-            location.setText("Latitude: " + mLastLocation.getLatitude() + " Longitude: " + mLastLocation.getLongitude());
+            latitude= mLastLocation.getLatitude();
+            longitude = mLastLocation.getLongitude();
+            //location.setText("Latitude: " + mLastLocation.getLatitude() + " Longitude: " + mLastLocation.getLongitude());
+            getWeatherFromAPI(latitude, longitude);
         }
     };
 
@@ -190,9 +200,7 @@ public class DashboardFragment extends Fragment {
     private boolean checkPermissions() {
         return ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
-        // If we want background location
-        // on Android 10.0 and higher,
-        // use:
+        // If we want background location on Android 10.0 and higher, use:
         // ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 
@@ -210,19 +218,6 @@ public class DashboardFragment extends Fragment {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-    // If everything is alright then
-//    @Override
-//    public void
-//    onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//
-//        if (requestCode == PERMISSION_ID) {
-//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                getLastLocation();
-//            }
-//        }
-//    }
-
     public void checkPermissionAndRequest() {
         if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -235,7 +230,6 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -243,5 +237,59 @@ public class DashboardFragment extends Fragment {
             getLastLocation();
         }
     }
+
+    private void getWeatherFromAPI(final double latitude, final double longitude) {
+        Thread networkThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Construct the URL for the API call
+                    String apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude +"&appid=" + apiKey + "&units=imperial";
+                    URL url = new URL(apiUrl);
+
+                    // Open a connection to the URL
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    // Read the response from the API
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    reader.close();
+
+                    // Parse the JSON response
+                    final JSONObject jsonResponse = new JSONObject(response.toString());
+
+                    // Update the UI on the main thread
+                    requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                location.setText(jsonResponse.getString("name"));
+                                double temperature = jsonResponse.getJSONObject("main").getDouble("temp");
+                                temp.setText(temperature + "");
+                                status.setText(jsonResponse.getJSONArray("weather").getJSONObject(0).getString("description"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                    // Close the connection
+                    connection.disconnect();
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        networkThread.start();
+    }
+
+
 
 }
