@@ -1,11 +1,17 @@
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
 }
 
 android {
     namespace = "com.example.stylesphere"
     compileSdk = 33
+
+    buildFeatures {
+        viewBinding = true
+        android.buildFeatures.buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.example.stylesphere"
@@ -18,17 +24,24 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "weatherAPIKey",  "\"f0ad6112130a345e7a07c586812dcb41\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "weatherAPIKey",  "\"f0ad6112130a345e7a07c586812dcb41\"")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    buildFeatures {
-        viewBinding = true
+
+}
+buildscript {
+    dependencies {
+        classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
     }
 }
 
@@ -42,6 +55,9 @@ dependencies {
             because("kotlin-stdlib-jdk8 is now part of kotlin-stdlib")
         }
     }
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+
+
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
@@ -18,7 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.example.stylesphere.BuildConfig;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -48,6 +49,9 @@ import java.util.Locale;
 
 
 import com.example.stylesphere.databinding.FragmentDashboardBinding;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,7 +74,9 @@ public class DashboardFragment extends Fragment {
     //Used to be ActivityResultLauncher<String[]> ,, make sure that this doesnt crash app later
     private double latitude;
     private double longitude;
-    String apiKey = "f0ad6112130a345e7a07c586812dcb41\n";
+    private StorageReference mStorageRef;
+    private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("default");
+    private Uri mImageUri1;
 
 
 
@@ -113,7 +119,8 @@ public class DashboardFragment extends Fragment {
         getWeather = root.findViewById(R.id.weatherButton);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getActivity());
-
+        DatabaseReference getImage = mDatabaseRef.child("image1");
+        //clothing1.setImageURI(mDatabaseRef.child("images1").push().setValue(String.ValueOf(taskSnapshot.getDownloadUrl())));
         // method to get the location
         getWeather.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -243,8 +250,10 @@ public class DashboardFragment extends Fragment {
             @Override
             public void run() {
                 try {
+                    String apikey = BuildConfig.weatherAPIKey;
                     // Construct the URL for the API call
-                    String apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude +"&appid=" + apiKey + "&units=imperial";
+                    String apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude +"&appid=" + apikey
+                            + "&units=imperial";
                     URL url = new URL(apiUrl);
 
                     // Open a connection to the URL
@@ -271,7 +280,7 @@ public class DashboardFragment extends Fragment {
                             try {
                                 location.setText(jsonResponse.getString("name"));
                                 double temperature = jsonResponse.getJSONObject("main").getDouble("temp");
-                                temp.setText(temperature + "");
+                                temp.setText(temperature + " °F");
                                 status.setText(jsonResponse.getJSONArray("weather").getJSONObject(0).getString("description"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
