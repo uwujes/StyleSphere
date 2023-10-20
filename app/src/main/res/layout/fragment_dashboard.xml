@@ -38,29 +38,28 @@
 
     <ImageView
         android:id="@+id/clothing1"
-        android:layout_width="231dp"
-        android:layout_height="242dp"
+        android:layout_width="207dp"
+        android:layout_height="204dp"
+        android:layout_marginStart="16dp"
         android:contentDescription="@string/firstItem"
+        android:src="@drawable/heart_in_rings_y2k_element_with_pastel_hologram_holographic_chrome_3d_effect_png"
         app:layout_constraintBottom_toTopOf="@+id/clothing2"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDate"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location"
-        app:layout_constraintVertical_bias="0.5"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <ImageView
         android:id="@+id/clothing2"
         android:layout_width="207dp"
         android:layout_height="204dp"
         android:contentDescription="@string/sndItem"
+        android:src="@drawable/heart_in_rings_y2k_element_with_pastel_hologram_holographic_chrome_3d_effect_png"
         app:layout_constraintBottom_toTopOf="@+id/weatherButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/weatherDescription"
         app:layout_constraintTop_toBottomOf="@+id/temperature"
-        app:layout_constraintVertical_bias="0.5"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/weatherButton"

@@ -51,6 +51,7 @@ import java.util.Locale;
 import com.example.stylesphere.databinding.FragmentDashboardBinding;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONException;
@@ -74,8 +75,8 @@ public class DashboardFragment extends Fragment {
     //Used to be ActivityResultLauncher<String[]> ,, make sure that this doesnt crash app later
     private double latitude;
     private double longitude;
-    private StorageReference mStorageRef;
-    private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("default");
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("defaultSuggested");
+    private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
     private Uri mImageUri1;
 
 
@@ -119,8 +120,7 @@ public class DashboardFragment extends Fragment {
         getWeather = root.findViewById(R.id.weatherButton);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getActivity());
-        DatabaseReference getImage = mDatabaseRef.child("image1");
-        //clothing1.setImageURI(mDatabaseRef.child("images1").push().setValue(String.ValueOf(taskSnapshot.getDownloadUrl())));
+
         // method to get the location
         getWeather.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
