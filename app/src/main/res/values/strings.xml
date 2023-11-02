@@ -25,8 +25,7 @@
     <string name="location">Location</string>
     <string name="temp">Temp</string>
     <string name="date">Date</string>
-
-
+    <string name="SignIn">Sign in !</string>
 
     <string name="faqText">
         "<b>How good do the pictures have to be?</b>\n As long as the item is centered and you can see the clothing item, it is good.\n\n
