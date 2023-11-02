@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "177085890128",
+    "firebase_url": "https://stylesphere-2c4ed-default-rtdb.firebaseio.com",
     "project_id": "stylesphere-2c4ed",
     "storage_bucket": "stylesphere-2c4ed.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.stylesphere"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "177085890128-fb535go2glqli8t40ghla3qk5g6f2rek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stylesphere",
+            "certificate_hash": "55f8ac537412e66e3f5581f99b26a1987daf2e50"
+          }
+        },
+        {
+          "client_id": "177085890128-pocjnqump5h7tofbvmlo7ifjfgksbs9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCvi2o7kCiJ5dIxhdf4mPRh1UFQouxFLGw"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177085890128-pocjnqump5h7tofbvmlo7ifjfgksbs9m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

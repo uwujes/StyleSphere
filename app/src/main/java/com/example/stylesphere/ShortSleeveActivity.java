@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -12,7 +13,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -44,11 +46,16 @@ public class ShortSleeveActivity extends AppCompatActivity {
     private ImageView mImageView;
     private ProgressBar mProgressBar;
     private Uri mImageUri;
-    private StorageReference mStorageRef;
-    private DatabaseReference mDatabaseRef;
     private GridView gridView;
     private ArrayList<ImageData> dataList;
     private MyAdapter adapter;
+    private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
+    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+    String userId = firebaseUser.getUid();
+
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("shortSleeves/" + userId);
+    private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("shortSleeves/" + userId);
+
 
 
     @Override
@@ -65,9 +72,6 @@ public class ShortSleeveActivity extends AppCompatActivity {
         mButtonUpload = findViewById(R.id.button_upload);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
-
-        mStorageRef = FirebaseStorage.getInstance().getReference("shortSleeves");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("shortSleeves");
 
         gridView = findViewById(R.id.gridView);
         dataList = new ArrayList<>();
@@ -122,21 +126,26 @@ public class ShortSleeveActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseError", "Database error: " + error.getMessage());
+
             }
         });
     }
 
     private void uploadToFirebase(Uri uri) {
-        final StorageReference imageReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+
+        String imageKey = String.valueOf(System.currentTimeMillis());
+        StorageReference imageReference = mStorageRef.child(imageKey + "." + getFileExtension(uri));
         imageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        ImageData dataClass = new ImageData("shortSleeves", uri.toString());
                         String key = mDatabaseRef.push().getKey();
+                        ImageData dataClass = new ImageData("shortSleeves", uri.toString());
                         mDatabaseRef.child(key).setValue(dataClass);
+
                         mProgressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(ShortSleeveActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ShortSleeveActivity.this, MainActivity.class);

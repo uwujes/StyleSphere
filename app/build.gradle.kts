@@ -1,11 +1,17 @@
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
 }
 
 android {
     namespace = "com.example.stylesphere"
     compileSdk = 33
+
+    buildFeatures {
+        viewBinding = true
+        android.buildFeatures.buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.example.stylesphere"
@@ -18,17 +24,24 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "weatherAPIKey",  "\"f0ad6112130a345e7a07c586812dcb41\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "weatherAPIKey",  "\"f0ad6112130a345e7a07c586812dcb41\"")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    buildFeatures {
-        viewBinding = true
+
+}
+buildscript {
+    dependencies {
+        classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
     }
 }
 
@@ -42,6 +55,9 @@ dependencies {
             because("kotlin-stdlib-jdk8 is now part of kotlin-stdlib")
         }
     }
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+
+
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
@@ -55,10 +71,21 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("com.google.android.gms:play-services-location:18.0.0") //Location dependency
 
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth:22.0.0")
+
+
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:20.1.0")
 
     // Import the Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
 
 
     // TO DO: Add the dependencies for Firebase products you want to use
