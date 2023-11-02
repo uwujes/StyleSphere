@@ -46,7 +46,6 @@ public class ShortSleeveActivity extends AppCompatActivity {
     private ImageView mImageView;
     private ProgressBar mProgressBar;
     private Uri mImageUri;
-
     private GridView gridView;
     private ArrayList<ImageData> dataList;
     private MyAdapter adapter;
@@ -56,8 +55,6 @@ public class ShortSleeveActivity extends AppCompatActivity {
 
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("shortSleeves/" + userId);
     private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("shortSleeves/" + userId);
-
-
 
 
 
@@ -75,7 +72,6 @@ public class ShortSleeveActivity extends AppCompatActivity {
         mButtonUpload = findViewById(R.id.button_upload);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
-
 
         gridView = findViewById(R.id.gridView);
         dataList = new ArrayList<>();
@@ -146,11 +142,9 @@ public class ShortSleeveActivity extends AppCompatActivity {
                 imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        String imageKey = mDatabaseRef.push().getKey();
+                        String key = mDatabaseRef.push().getKey();
                         ImageData dataClass = new ImageData("shortSleeves", uri.toString());
-                        mDatabaseRef.child(imageKey).setValue(dataClass);
-
-
+                        mDatabaseRef.child(key).setValue(dataClass);
 
                         mProgressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(ShortSleeveActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();

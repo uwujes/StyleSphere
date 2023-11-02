@@ -26,6 +26,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.stylesphere.databinding.ActivityShortsBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,11 +47,14 @@ public class ShortsActivity extends AppCompatActivity {
     private ImageView mImageView;
     private ProgressBar mProgressBar;
     private Uri mImageUri;
-    private StorageReference mStorageRef;
-    private DatabaseReference mDatabaseRef;
     private GridView gridView;
     private ArrayList<ImageData> dataList;
     private MyAdapter adapter;
+    private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
+    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+    String userId = firebaseUser.getUid();
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("shorts/" + userId);
+    private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("shorts/" + userId);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +70,6 @@ public class ShortsActivity extends AppCompatActivity {
         mButtonUpload = findViewById(R.id.button_upload);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
-
-        mStorageRef = FirebaseStorage.getInstance().getReference("shorts");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("shorts");
 
         gridView = findViewById(R.id.gridView);
         dataList = new ArrayList<>();
@@ -127,16 +129,18 @@ public class ShortsActivity extends AppCompatActivity {
     }
 
     private void uploadToFirebase(Uri uri) {
-        final StorageReference imageReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+        String imageKey = String.valueOf(System.currentTimeMillis());
+        StorageReference imageReference = mStorageRef.child(imageKey + "." + getFileExtension(uri));
         imageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        ImageData dataClass = new ImageData("shorts", uri.toString());
                         String key = mDatabaseRef.push().getKey();
+                        ImageData dataClass = new ImageData("shorts", uri.toString());
                         mDatabaseRef.child(key).setValue(dataClass);
+
                         mProgressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(ShortsActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ShortsActivity.this, MainActivity.class);
