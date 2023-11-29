@@ -379,6 +379,7 @@ public class DashboardFragment extends Fragment {
                         public void onCallback(String url) {
                             // Use the URL here or pass it to another method
                             Picasso.get().load(url).into(clothing1);
+                            Picasso.get().load(url).into(clothing2);
 
                         }
                     });
