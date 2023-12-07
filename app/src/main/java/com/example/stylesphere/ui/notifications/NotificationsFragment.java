@@ -6,17 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-
-import com.example.stylesphere.FAQ;
-import com.example.stylesphere.R;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.stylesphere.FAQ;
+import com.example.stylesphere.R;
+import com.example.stylesphere.SignInActivity;
 import com.example.stylesphere.StyleTips;
 import com.example.stylesphere.databinding.FragmentNotificationsBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class NotificationsFragment extends Fragment {
 
@@ -24,6 +24,8 @@ public class NotificationsFragment extends Fragment {
 
     private Button faq;
     private Button tips;
+    private Button signOut;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel =
@@ -32,11 +34,12 @@ public class NotificationsFragment extends Fragment {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
+//        final TextView textView = binding.textNotifications;
         faq = root.findViewById(R.id.faq);
         tips = root.findViewById(R.id.stlyeTips);
+        signOut = root.findViewById(R.id.signOut);
 
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+//        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +54,13 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOutUser();
+            }
+        });
+
         return root;
     }
 
@@ -61,6 +71,11 @@ public class NotificationsFragment extends Fragment {
 
     public void openStyleTips() {
         Intent intent = new Intent(requireContext(), StyleTips.class);
+        startActivity(intent);
+    }
+    public void signOutUser() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(requireContext(), SignInActivity.class);
         startActivity(intent);
     }
 
